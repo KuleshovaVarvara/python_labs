@@ -33,7 +33,7 @@ def main() -> None:
 
         # 2. Перемешиваем и берём несколько
         random.shuffle(categories)
-        selected = categories[:5]  # 5 случайных категорий
+        selected = categories[:5]
 
         # 3. Собираем ссылки на звуки из этих категорий
         all_links = []

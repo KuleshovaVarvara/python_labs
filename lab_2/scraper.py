@@ -15,8 +15,11 @@ def get_html(url: str) -> str:
     :return: текст HTML
     """
     response = requests.get(url, headers=HEADERS)
-    response.raise_for_status()
-    return response.text
+
+    if response.ok:
+        return response.text
+    else:
+        raise Exception(f"Ошибка при загрузке {url}: код {response.status_code}")
 
 
 def download_file(url: str, filepath: str) -> None:
@@ -26,6 +29,9 @@ def download_file(url: str, filepath: str) -> None:
     :param filepath: путь для сохранения
     """
     response = requests.get(url, headers=HEADERS)
-    response.raise_for_status()
-    with open(filepath, 'wb') as file:
-        file.write(response.content)
+
+    if response.ok:
+        with open(filepath, 'wb') as file:
+            file.write(response.content)
+    else:
+        raise Exception(f"Ошибка при скачивании файла: код {response.status_code}")
